@@ -19,25 +19,7 @@ from auth_service import (
     GLOBAL_TRIAL_LOCK, USERS_DB
 )
 
-from fastapi.responses import FileResponse
-BASE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 
-@app.get('/')
-def serve_root():
-    return FileResponse(os.path.join(BASE_ROOT, 'index.html'))
-
-@app.get('/style.css')
-def serve_css():
-    return FileResponse(os.path.join(BASE_ROOT, 'style.css'))
-
-@app.get('/app.js')
-def serve_js():
-    return FileResponse(os.path.join(BASE_ROOT, 'app.js'))
-
-@app.get('/engine.js')
-def serve_engine():
-    return FileResponse(os.path.join(BASE_ROOT, 'engine.js'))
-))
 
 app = FastAPI(
     title="Global Money Transfer Search API",
@@ -52,6 +34,25 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+from fastapi.responses import FileResponse
+BASE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+@app.get("/")
+def serve_root():
+    return FileResponse(os.path.join(BASE_ROOT, "index.html"))
+
+@app.get("/style.css")
+def serve_css():
+    return FileResponse(os.path.join(BASE_ROOT, "style.css"))
+
+@app.get("/app.js")
+def serve_js():
+    return FileResponse(os.path.join(BASE_ROOT, "app.js"))
+
+@app.get("/engine.js")
+def serve_engine():
+    return FileResponse(os.path.join(BASE_ROOT, "engine.js"))
 
 @app.get("/api/health")
 def health():
